@@ -198,7 +198,7 @@ export const Table = ({ data, isAdmin }) => {
                   let text = ''
                   let suffix = ''
                   let capitalize = ''
-                  let link = `/stories/${row.values.ID}`
+                  let link = `/story/view/${row.values.ID}`
 
                   if (cell.column.id === 'cost') {
                     prefix = '$ '

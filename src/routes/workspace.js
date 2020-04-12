@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect, Link, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
 
 import {
@@ -10,7 +10,9 @@ import {
   clearUserStories,
 } from '../actions'
 import { getUserProfileFromLocal } from '../components/utils'
-import { Table } from '../components/table'
+
+import StoriesListPage from './lists'
+import CreateStoryPage from './create'
 
 const NavBar = ({ logout, createNewStory, isAdmin }) => {
   const [isNavCollapsed, toggleNav] = useState(false)
@@ -31,11 +33,12 @@ const NavBar = ({ logout, createNewStory, isAdmin }) => {
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
           {!isAdmin && (
             <li className="nav-item">
-              <button
+              <Link
+                to="/story/new"
                 className="btn btn-outline-secondary my-2 my-sm-0 btn-block"
                 onClick={createNewStory}>
                 + Create new story
-              </button>
+              </Link>
             </li>
           )}
           <li className="navbar-item">
@@ -133,8 +136,23 @@ class Workspace extends Component {
         {isLoggedIn === false && <Redirect to="/login" />}
         <NavBar logout={this.clickedLogout} isAdmin={this.props.user.isAdmin} />
         <section className="m-md-4 m-sm-0">
-          <h1 className="text-center my-4">User Stories</h1>
-          <Table data={this.props.stories} isAdmin={this.props.user.isAdmin} />
+          <Switch>
+            <Route exact path="/">
+              <h1 className="text-center my-4">User Stories</h1>
+              <StoriesListPage
+                stories={this.props.stories}
+                isAdmin={this.props.user.isAdmin}
+              />
+            </Route>
+            <Route path="/story/view/:id">
+              <h1 className="text-center my-4">User Story</h1>
+            </Route>
+            <Route
+              path="/story/new"
+              render={(props) => (
+                <CreateStoryPage isAdmin={this.props.user.isAdmin} {...props} />
+              )}></Route>
+          </Switch>
         </section>
       </div>
     )

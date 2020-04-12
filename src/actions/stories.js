@@ -6,7 +6,7 @@ const {
   CLEAR_USER_STORIES,
 } = actionTypes
 
-export const addUserStories = (stories) => ({
+export const addUserStories = (stories = []) => ({
   type: ADD_USER_STORIES,
   payload: stories,
 })
