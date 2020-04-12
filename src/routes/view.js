@@ -23,7 +23,7 @@ class ViewStory extends React.Component {
   }
 
   async componentDidMount() {
-    const baseURL = process.env.REACT_APP_BASE_URL
+    const baseURL = 'https://tira-api.herokuapp.com/api/v1'
     const { token } = getUserProfileFromLocal()
 
     try {

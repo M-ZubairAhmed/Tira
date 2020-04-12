@@ -94,7 +94,7 @@ class Workspace extends Component {
 
   async fetchStories() {
     const { token } = getUserProfileFromLocal()
-    const baseURL = process.env.REACT_APP_BASE_URL
+    const baseURL = 'https://tira-api.herokuapp.com/api/v1'
     try {
       const userStoriesResponse = await axios({
         method: 'get',

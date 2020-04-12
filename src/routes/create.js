@@ -46,7 +46,7 @@ class CreateStory extends React.Component {
     } else {
       this.setState({ isLoading: true })
       try {
-        const baseURL = process.env.REACT_APP_BASE_URL
+        const baseURL = 'https://tira-api.herokuapp.com/api/v1'
         const { token } = getUserProfileFromLocal()
 
         const response = await axios({

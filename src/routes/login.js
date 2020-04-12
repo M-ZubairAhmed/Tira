@@ -75,7 +75,7 @@ class Login extends Component {
         this.setState({
           isLoading: true,
         })
-        const baseURL = process.env.REACT_APP_BASE_URL
+        const baseURL = 'https://tira-api.herokuapp.com/api/v1'
 
         const loginResponse = await axios({
           method: 'post',
