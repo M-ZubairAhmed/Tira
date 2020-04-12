@@ -1,7 +1,7 @@
 import actionTypes from '../constants/action-types'
 
 const {
-  UPDATE_USER_STORIES,
+  UPDATE_STORY_STATUS,
   ADD_USER_STORIES,
   CLEAR_USER_STORIES,
 } = actionTypes
@@ -11,9 +11,9 @@ export const addUserStories = (stories = []) => ({
   payload: stories,
 })
 
-export const updateUserStory = (story) => ({
-  type: UPDATE_USER_STORIES,
-  payload: story,
+export const updateStoryStatus = (updatedID, updatedStatus) => ({
+  type: UPDATE_STORY_STATUS,
+  payload: { updatedID, updatedStatus },
 })
 
 export const clearUserStories = () => ({

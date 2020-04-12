@@ -12,7 +12,7 @@ export default (state = [], action) => {
       const { payload } = action
 
       const stories = payload.map((story) => ({
-        ID: story.id,
+        ID: String(story.id),
         summary: story.summary,
         description: story.description,
         type: story.type,
@@ -28,19 +28,24 @@ export default (state = [], action) => {
     case UPDATE_STORY_STATUS: {
       const { payload } = action
       const { updatedID, updatedStatus } = payload
-      const foundStory = state.find((story) => story.ID === updatedID)
+      const foundStoryIndex = state.findIndex((story) => story.ID === updatedID)
 
       const updatedStory = {
-        ID: foundStory.id,
-        summary: foundStory.summary,
-        description: foundStory.description,
-        type: foundStory.type,
-        complexity: foundStory.complexity,
-        estimatedHrs: foundStory.estimatedHrs,
-        cost: foundStory.cost,
+        ID: String(updatedID),
+        summary: state[foundStoryIndex].summary,
+        description: state[foundStoryIndex].description,
+        type: state[foundStoryIndex].type,
+        complexity: state[foundStoryIndex].complexity,
+        estimatedHrs: state[foundStoryIndex].estimatedHrs,
+        cost: state[foundStoryIndex].cost,
         status: updatedStatus,
       }
-      return [...state, { updatedStory }]
+
+      return [
+        ...state.slice(0, foundStoryIndex),
+        updatedStory,
+        ...state.slice(foundStoryIndex + 1),
+      ]
     }
 
     case CLEAR_USER_STORIES: {

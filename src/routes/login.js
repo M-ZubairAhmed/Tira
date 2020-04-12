@@ -8,7 +8,7 @@ import { updateUserProfileData } from '../actions'
 import {
   getUserProfileFromLocal,
   setUserProfileToLocal,
-} from '../components/utils'
+} from '../actions/localstorage'
 
 class Login extends Component {
   state = {

@@ -9,10 +9,11 @@ import {
   addUserStories,
   clearUserStories,
 } from '../actions'
-import { getUserProfileFromLocal } from '../components/utils'
+import { getUserProfileFromLocal } from '../actions/localstorage'
 
-import StoriesListPage from './lists'
+import ListStoriesPage from './lists'
 import CreateStoryPage from './create'
+import ViewStoryPage from './view'
 
 const NavBar = ({ logout, createNewStory, isAdmin }) => {
   const [isNavCollapsed, toggleNav] = useState(false)
@@ -139,19 +140,26 @@ class Workspace extends Component {
           <Switch>
             <Route exact path="/">
               <h1 className="text-center my-4">User Stories</h1>
-              <StoriesListPage
+              <ListStoriesPage
                 stories={this.props.stories}
                 isAdmin={this.props.user.isAdmin}
               />
             </Route>
-            <Route path="/story/view/:id">
-              <h1 className="text-center my-4">User Story</h1>
+            <Route
+              path="/story/view/:id"
+              render={(props) => (
+                <ViewStoryPage isAdmin={this.props.user.isAdmin} {...props} />
+              )}
+            />
+            <Route path="/story/view">
+              <Redirect to="/" />
             </Route>
             <Route
               path="/story/new"
               render={(props) => (
                 <CreateStoryPage isAdmin={this.props.user.isAdmin} {...props} />
-              )}></Route>
+              )}
+            />
           </Switch>
         </section>
       </div>

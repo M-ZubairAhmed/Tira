@@ -1,10 +1,10 @@
 import { updateUserProfileData, clearUserProfileData } from './user'
-import { addUserStories, updateUserStory, clearUserStories } from './stories'
+import { addUserStories, updateStoryStatus, clearUserStories } from './stories'
 
 export {
   updateUserProfileData,
   clearUserProfileData,
   addUserStories,
-  updateUserStory,
+  updateStoryStatus,
   clearUserStories,
 }

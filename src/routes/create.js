@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import { updateUserProfileData, addUserStories } from '../actions'
-import { getUserProfileFromLocal } from '../components/utils'
+import { getUserProfileFromLocal } from '../actions/localstorage'
 
 class CreateStory extends React.Component {
   state = {
